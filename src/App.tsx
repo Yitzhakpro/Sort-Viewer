@@ -2,11 +2,11 @@ import { ControlPanel, SortingContainer } from "./components";
 import useSortControls from "./hooks";
 
 function App() {
-  const { list, genNewList } = useSortControls();
+  const { list, maxNum, genNewList } = useSortControls();
 
   return (
     <>
-      <SortingContainer list={list} />
+      <SortingContainer list={list} maxNum={maxNum} />
       <ControlPanel genNewList={genNewList} />
     </>
   );
