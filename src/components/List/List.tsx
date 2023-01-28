@@ -12,7 +12,9 @@ function List(props: IListProps): JSX.Element {
   return (
     <div className="list">
       {list.map((number) => {
-        return <ListItem number={number} maxNum={maxNum} />;
+        return (
+          <ListItem number={number} maxNum={maxNum} listLength={list.length} />
+        );
       })}
     </div>
   );
