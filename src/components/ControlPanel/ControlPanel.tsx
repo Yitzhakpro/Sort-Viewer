@@ -1,4 +1,9 @@
 import { useState } from "react";
+import {
+  DEFAULT_RANDOM_ARRAY_LENGTH,
+  DEFAULT_MIN_RANDOM_NUMBER,
+  DEFAULT_MAX_RANDOM_NUMBER,
+} from "../../constants";
 import "./controlPanel.css";
 
 interface IControlPanelProps {
@@ -8,9 +13,9 @@ interface IControlPanelProps {
 function ControlPanel(props: IControlPanelProps): JSX.Element {
   const { genNewList } = props;
 
-  const [length, setLength] = useState(5);
-  const [min, setMin] = useState(0);
-  const [max, setMax] = useState(100);
+  const [length, setLength] = useState(DEFAULT_RANDOM_ARRAY_LENGTH);
+  const [min, setMin] = useState(DEFAULT_MIN_RANDOM_NUMBER);
+  const [max, setMax] = useState(DEFAULT_MAX_RANDOM_NUMBER);
 
   const handleGenNewList = (): void => {
     genNewList(length, min, max);
