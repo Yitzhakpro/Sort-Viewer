@@ -7,7 +7,7 @@ interface ISortingContainerProps {
 function SortingContainer(props: ISortingContainerProps): JSX.Element {
   const { list } = props;
 
-  return <div className="sorting-container">{list}</div>;
+  return <div className="sorting-container">{list.toString()}</div>;
 }
 
 export default SortingContainer;

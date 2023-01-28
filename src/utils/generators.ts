@@ -1,5 +1,5 @@
 export const genRandomNumber = (min = 0, max = 100): number => {
-  return Math.random() * (max - min) + min;
+  return Math.floor(Math.random() * (max - min) + min);
 };
 
 export const generateNumberArray = (
