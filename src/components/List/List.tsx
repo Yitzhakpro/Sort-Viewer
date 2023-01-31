@@ -4,22 +4,16 @@ import "./list.css";
 
 interface IListProps {
   list: number[];
-  maxNum: number;
 }
 
 function List(props: IListProps): JSX.Element {
-  const { list, maxNum } = props;
+  const { list } = props;
 
   return (
     <div className="list">
       {list.map((number) => {
         return (
-          <ListItem
-            key={nanoid()}
-            number={number}
-            maxNum={maxNum}
-            listLength={list.length}
-          />
+          <ListItem key={nanoid()} number={number} listLength={list.length} />
         );
       })}
     </div>
