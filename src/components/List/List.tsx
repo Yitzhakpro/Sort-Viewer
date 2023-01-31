@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import ListItem from "../ListItem";
 import "./list.css";
 
@@ -13,7 +14,12 @@ function List(props: IListProps): JSX.Element {
     <div className="list">
       {list.map((number) => {
         return (
-          <ListItem number={number} maxNum={maxNum} listLength={list.length} />
+          <ListItem
+            key={nanoid()}
+            number={number}
+            maxNum={maxNum}
+            listLength={list.length}
+          />
         );
       })}
     </div>
