@@ -1,0 +1,9 @@
+.sorting-container {
+  height: 70%;
+
+  padding: 0 10%;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
