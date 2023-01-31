@@ -1,4 +1,5 @@
 import { DEFAULT_MAX_RANDOM_NUMBER } from "../../constants";
+import { isMobileScreen } from "../../utils";
 import "./listItem.css";
 
 interface IListItemProps {
@@ -13,6 +14,8 @@ function ListItem(props: IListItemProps): JSX.Element {
   const heightPrecentage = (number * 100) / DEFAULT_MAX_RANDOM_NUMBER;
   const widthPrecentage = (1 * 100) / listLength;
 
+  const shouldDisplayNumber = !isMobileScreen() && listLength < 25;
+
   return (
     <div
       className="list-item"
@@ -21,7 +24,9 @@ function ListItem(props: IListItemProps): JSX.Element {
         width: `${widthPrecentage}%`,
       }}
     >
-      <div className="list-item-color" style={{ backgroundColor: color }} />
+      <div className="list-item-color" style={{ backgroundColor: color }}>
+        {shouldDisplayNumber && <p className="list-item-number">{number}</p>}
+      </div>
     </div>
   );
 }

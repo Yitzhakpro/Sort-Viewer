@@ -2,4 +2,13 @@
   margin: 0 auto;
   height: 100%;
   width: 80%;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.list-item-number {
+  color: white;
+  text-align: center;
 }
