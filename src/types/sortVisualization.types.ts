@@ -1,5 +1,7 @@
 import type { CSSProperties } from "react";
 
+export type SortAlgorithm = "bubbleSort";
+
 export interface ColorMapping {
   [index: number]: CSSProperties["backgroundColor"];
 }
