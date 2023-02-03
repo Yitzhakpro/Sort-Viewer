@@ -10,7 +10,7 @@ export function bubbleSortWithSteps<T>(arr: T[]): SortSteps<T> {
       bubbleSortSteps.push(
         createSortStep(
           arr,
-          { [j]: "green", [j + 1]: "green" },
+          { [j]: "CHECK", [j + 1]: "CHECK" },
           { ...bubbleSortSteps.at(-1)?.permanentColorMapping }
         )
       );
@@ -18,7 +18,7 @@ export function bubbleSortWithSteps<T>(arr: T[]): SortSteps<T> {
         bubbleSortSteps.push(
           createSortStep(
             arr,
-            { [j]: "red", [j + 1]: "red" },
+            { [j]: "SWAPPING", [j + 1]: "SWAPPING" },
             { ...bubbleSortSteps.at(-1)?.permanentColorMapping }
           )
         );
@@ -28,7 +28,7 @@ export function bubbleSortWithSteps<T>(arr: T[]): SortSteps<T> {
         bubbleSortSteps.push(
           createSortStep(
             arr,
-            { [j]: "red", [j + 1]: "red" },
+            { [j]: "SWAPPING", [j + 1]: "SWAPPING" },
             { ...bubbleSortSteps.at(-1)?.permanentColorMapping }
           )
         );
@@ -40,7 +40,7 @@ export function bubbleSortWithSteps<T>(arr: T[]): SortSteps<T> {
         {},
         {
           ...bubbleSortSteps.at(-1)?.permanentColorMapping,
-          [arrSize - i - 1]: "purple",
+          [arrSize - i - 1]: "SORTED",
         }
       )
     );
@@ -53,7 +53,7 @@ export function bubbleSortWithSteps<T>(arr: T[]): SortSteps<T> {
       {},
       {
         ...bubbleSortSteps.at(-1)?.permanentColorMapping,
-        0: "purple",
+        0: "SORTED",
       }
     )
   );

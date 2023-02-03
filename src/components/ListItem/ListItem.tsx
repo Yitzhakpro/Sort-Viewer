@@ -1,4 +1,7 @@
-import { DEFAULT_MAX_RANDOM_NUMBER } from "../../constants";
+import {
+  DEFAULT_MAX_RANDOM_NUMBER,
+  DEFAULT_LIST_ITEM_COLOR,
+} from "../../constants";
 import { isMobileScreen } from "../../utils";
 import "./listItem.css";
 
@@ -9,7 +12,7 @@ interface IListItemProps {
 }
 
 function ListItem(props: IListItemProps): JSX.Element {
-  const { number, listLength, color = "#333" } = props;
+  const { number, listLength, color = DEFAULT_LIST_ITEM_COLOR } = props;
 
   const heightPrecentage = (number * 100) / DEFAULT_MAX_RANDOM_NUMBER;
   const widthPrecentage = (1 * 100) / listLength;
