@@ -2,12 +2,12 @@ import { ControlPanel, SortingContainer } from "./components";
 import useSortControls from "./hooks";
 
 function App() {
-  const { listState, genNewList } = useSortControls();
+  const { listState, genNewList, performSort } = useSortControls();
 
   return (
     <>
       <SortingContainer listState={listState} />
-      <ControlPanel genNewList={genNewList} />
+      <ControlPanel genNewList={genNewList} performSort={performSort} />
     </>
   );
 }

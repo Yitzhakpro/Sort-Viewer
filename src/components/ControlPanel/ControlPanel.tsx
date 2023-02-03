@@ -5,11 +5,11 @@ import "./controlPanel.css";
 
 interface IControlPanelProps {
   genNewList: (length?: number, min?: number, max?: number) => void;
-  // performSort: (sortAlgorithm: SortAlgorithm, speed?: number) => void;
+  performSort: (sortAlgorithm: SortAlgorithm, speed?: number) => Promise<void>;
 }
 
 function ControlPanel(props: IControlPanelProps): JSX.Element {
-  const { genNewList } = props;
+  const { genNewList, performSort } = props;
 
   const [length, setLength] = useState(DEFAULT_RANDOM_ARRAY_LENGTH);
 
@@ -19,12 +19,12 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
     genNewList(length);
   };
 
-  const handleStartSort = (): void => {
+  const handleStartSort = async (): Promise<void> => {
     if (!algorithm) {
       return;
     }
 
-    console.log(algorithm);
+    await performSort(algorithm);
   };
 
   return (
