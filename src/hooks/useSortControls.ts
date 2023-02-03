@@ -1,22 +1,25 @@
 import { useState } from "react";
 import { DEFAULT_RANDOM_ARRAY_LENGTH } from "../constants";
-import { generateNumberArray } from "../utils";
+import { initSortStep, generateNumberArray } from "../utils";
+import type { SortStep } from "../types";
 
 interface UseSortControlsReturn {
-  list: number[];
+  listState: SortStep<number>;
   genNewList: (length?: number, min?: number, max?: number) => void;
 }
 
 function useSortControls(): UseSortControlsReturn {
-  const [list, setList] = useState(generateNumberArray());
+  const [listState, setListState] = useState(
+    initSortStep(generateNumberArray())
+  );
 
   const genNewList = (length = DEFAULT_RANDOM_ARRAY_LENGTH): void => {
-    const newList = generateNumberArray(length);
+    const newList = initSortStep(generateNumberArray(length));
 
-    setList(newList);
+    setListState(newList);
   };
 
-  return { list, genNewList };
+  return { listState, genNewList };
 }
 
 export default useSortControls;
