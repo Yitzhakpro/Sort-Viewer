@@ -1,16 +1,17 @@
 import List from "../List";
+import type { SortStep } from "../../types";
 import "./sortingContainer.css";
 
 interface ISortingContainerProps {
-  list: number[];
+  listState: SortStep<number>;
 }
 
 function SortingContainer(props: ISortingContainerProps): JSX.Element {
-  const { list } = props;
+  const { listState } = props;
 
   return (
     <div className="sorting-container">
-      <List list={list} />
+      <List listState={listState} />
     </div>
   );
 }
