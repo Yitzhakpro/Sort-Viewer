@@ -46,5 +46,20 @@ export function bubbleSortWithSteps<T>(arr: T[]): SortSteps<T> {
     );
   }
 
+  // adding last index as "done" iterating
+  bubbleSortSteps.push(
+    createSortStep(
+      arr,
+      {},
+      {
+        ...bubbleSortSteps.at(-1)?.permanentColorMapping,
+        0: "purple",
+      }
+    )
+  );
+
+  // settings color to default
+  bubbleSortSteps.push(createSortStep(arr, {}, {}));
+
   return bubbleSortSteps;
 }
