@@ -6,10 +6,11 @@ import "./controlPanel.css";
 interface IControlPanelProps {
   genNewList: (length?: number, min?: number, max?: number) => void;
   performSort: (sortAlgorithm: SortAlgorithm, speed?: number) => Promise<void>;
+  stopSort: () => void;
 }
 
 function ControlPanel(props: IControlPanelProps): JSX.Element {
-  const { genNewList, performSort } = props;
+  const { genNewList, performSort, stopSort } = props;
 
   const [length, setLength] = useState(DEFAULT_RANDOM_ARRAY_LENGTH);
 
@@ -27,6 +28,10 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
     await performSort(algorithm);
   };
 
+  const handleStopSort = (): void => {
+    stopSort();
+  };
+
   return (
     <div className="control-panel">
       <button onClick={handleGenNewList}>generate new list</button>
@@ -41,6 +46,7 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
       <button onClick={() => setAlgorithm("bubbleSort")}>bubbleSort</button>
 
       <button onClick={handleStartSort}>Start Sort</button>
+      <button onClick={handleStopSort}>Stop Sort</button>
     </div>
   );
 }
