@@ -1,11 +1,10 @@
-import { nanoid } from "nanoid";
 import { COLOR_SORTING_MAPPING } from "../../constants";
 import ListItem from "../ListItem";
-import type { SortStep } from "../../types";
+import type { IdentifiedNumber, SortStep } from "../../types";
 import "./list.css";
 
 interface IListProps {
-  listState: SortStep<number>;
+  listState: SortStep<IdentifiedNumber>;
 }
 
 function List(props: IListProps): JSX.Element {
@@ -15,7 +14,8 @@ function List(props: IListProps): JSX.Element {
 
   return (
     <div className="list">
-      {array.map((number, index) => {
+      {array.map((identifiedNumber, index) => {
+        const { id, number } = identifiedNumber;
         const itemColor =
           COLOR_SORTING_MAPPING[
             permanentColorMapping[index] || colorMapping[index]
@@ -23,7 +23,8 @@ function List(props: IListProps): JSX.Element {
 
         return (
           <ListItem
-            key={nanoid()}
+            key={id}
+            id={id}
             number={number}
             listLength={array.length}
             color={itemColor}
