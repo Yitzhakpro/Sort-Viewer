@@ -13,6 +13,7 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
   const { genNewList, performSort, stopSort } = props;
 
   const [length, setLength] = useState(DEFAULT_RANDOM_ARRAY_LENGTH);
+  const [speed, setSpeed] = useState(1000);
 
   const [algorithm, setAlgorithm] = useState<SortAlgorithm | "">("");
 
@@ -25,7 +26,7 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
       return;
     }
 
-    await performSort(algorithm);
+    await performSort(algorithm, speed);
   };
 
   const handleStopSort = (): void => {
@@ -41,6 +42,13 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
         type="number"
         value={length}
         onChange={(e) => setLength(parseInt(e.target.value))}
+      />
+
+      <span>speed (ms)</span>
+      <input
+        type="number"
+        value={speed}
+        onChange={(e) => setSpeed(parseInt(e.target.value))}
       />
 
       <button onClick={() => setAlgorithm("bubbleSort")}>bubbleSort</button>
