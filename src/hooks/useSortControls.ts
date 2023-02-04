@@ -1,11 +1,16 @@
 import { useState, useRef } from "react";
 import { DEFAULT_RANDOM_ARRAY_LENGTH } from "../constants";
-import { initSortStep, generateNumberArray, sleep } from "../utils";
+import { initSortStep, generateIdentifiedNumberList, sleep } from "../utils";
 import { bubbleSortWithSteps } from "../algorithms";
-import type { SortAlgorithm, SortStep, SortSteps } from "../types";
+import type {
+  IdentifiedNumber,
+  SortAlgorithm,
+  SortStep,
+  SortSteps,
+} from "../types";
 
 interface UseSortControlsReturn {
-  listState: SortStep<number>;
+  listState: SortStep<IdentifiedNumber>;
   genNewList: (length?: number, min?: number, max?: number) => void;
   performSort: (sortAlgorithm: SortAlgorithm, speed?: number) => Promise<void>;
   stopSort: () => void;
@@ -13,13 +18,16 @@ interface UseSortControlsReturn {
 
 function useSortControls(): UseSortControlsReturn {
   const [listState, setListState] = useState(
-    initSortStep(generateNumberArray())
+    initSortStep(generateIdentifiedNumberList())
   );
 
   const isSorting = useRef(false);
 
   const genNewList = (length = DEFAULT_RANDOM_ARRAY_LENGTH): void => {
-    const newList = initSortStep(generateNumberArray(length));
+    // stopping current sorting
+    isSorting.current = false;
+
+    const newList = initSortStep(generateIdentifiedNumberList(length));
 
     setListState(newList);
   };
@@ -28,7 +36,7 @@ function useSortControls(): UseSortControlsReturn {
     sortAlgorithm: SortAlgorithm,
     speed = 500
   ): Promise<void> => {
-    let steps: SortSteps<number>;
+    let steps: SortSteps<IdentifiedNumber>;
 
     switch (sortAlgorithm) {
       case "bubbleSort":

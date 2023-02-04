@@ -1,9 +1,9 @@
 import List from "../List";
-import type { SortStep } from "../../types";
+import type { IdentifiedNumber, SortStep } from "../../types";
 import "./sortingContainer.css";
 
 interface ISortingContainerProps {
-  listState: SortStep<number>;
+  listState: SortStep<IdentifiedNumber>;
 }
 
 function SortingContainer(props: ISortingContainerProps): JSX.Element {

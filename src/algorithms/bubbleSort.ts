@@ -1,9 +1,15 @@
 import { createSortStep, initSortStep } from "../utils";
-import type { SortSteps } from "../types";
+import type {
+  IdentifiedNumber,
+  IdentifiedNumberList,
+  SortSteps,
+} from "../types";
 
-export function bubbleSortWithSteps<T>(arr: T[]): SortSteps<T> {
+export function bubbleSortWithSteps(
+  arr: IdentifiedNumberList
+): SortSteps<IdentifiedNumber> {
   const arrSize = arr.length;
-  const bubbleSortSteps: SortSteps<T> = [initSortStep(arr)];
+  const bubbleSortSteps: SortSteps<IdentifiedNumber> = [initSortStep(arr)];
 
   for (let i = 0; i < arrSize - 1; i++) {
     for (let j = 0; j < arrSize - i - 1; j++) {
@@ -14,7 +20,7 @@ export function bubbleSortWithSteps<T>(arr: T[]): SortSteps<T> {
           { ...bubbleSortSteps.at(-1)?.permanentColorMapping }
         )
       );
-      if (arr[j] > arr[j + 1]) {
+      if (arr[j].number > arr[j + 1].number) {
         bubbleSortSteps.push(
           createSortStep(
             arr,
