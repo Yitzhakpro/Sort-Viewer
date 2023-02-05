@@ -2,7 +2,8 @@ import { ControlPanel, SortingContainer } from "./components";
 import useSortControls from "./hooks";
 
 function App() {
-  const { listState, genNewList, performSort, stopSort } = useSortControls();
+  const { listState, genNewList, performSort, stopSort, prevStep, nextStep } =
+    useSortControls();
 
   return (
     <>
@@ -11,6 +12,8 @@ function App() {
         genNewList={genNewList}
         performSort={performSort}
         stopSort={stopSort}
+        prevStep={prevStep}
+        nextStep={nextStep}
       />
     </>
   );

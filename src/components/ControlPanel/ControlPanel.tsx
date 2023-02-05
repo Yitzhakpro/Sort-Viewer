@@ -10,10 +10,12 @@ interface IControlPanelProps {
   genNewList: (length?: number, min?: number, max?: number) => void;
   performSort: (sortAlgorithm: SortAlgorithm, speed?: number) => Promise<void>;
   stopSort: () => void;
+  prevStep: () => void;
+  nextStep: () => void;
 }
 
 function ControlPanel(props: IControlPanelProps): JSX.Element {
-  const { genNewList, performSort, stopSort } = props;
+  const { genNewList, performSort, stopSort, prevStep, nextStep } = props;
 
   const [length, setLength] = useState(DEFAULT_RANDOM_ARRAY_LENGTH);
   const [speed, setSpeed] = useState(DEFAULT_SORT_SPEED);
@@ -59,6 +61,11 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
 
       <button onClick={handleStartSort}>Start Sort</button>
       <button onClick={handleStopSort}>Stop Sort</button>
+
+      <div>
+        <button onClick={prevStep}>back</button>
+        <button onClick={nextStep}>next</button>
+      </div>
     </div>
   );
 }

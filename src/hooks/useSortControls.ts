@@ -14,12 +14,18 @@ interface UseSortControlsReturn {
   genNewList: (length?: number, min?: number, max?: number) => void;
   performSort: (sortAlgorithm: SortAlgorithm, speed?: number) => Promise<void>;
   stopSort: () => void;
+  prevStep: () => void;
+  nextStep: () => void;
 }
 
 function useSortControls(): UseSortControlsReturn {
-  const [listState, setListState] = useState(
+  const [listState, setListState] = useState<SortStep<IdentifiedNumber>>(
     initSortStep(generateIdentifiedNumberList())
   );
+  const [sortSteps, setSortSteps] = useState<SortSteps<IdentifiedNumber>>([
+    listState,
+  ]);
+  const [stepIndex, setStepIndex] = useState(0);
 
   const isSorting = useRef(false);
 
@@ -30,12 +36,19 @@ function useSortControls(): UseSortControlsReturn {
     const newList = initSortStep(generateIdentifiedNumberList(length));
 
     setListState(newList);
+    setSortSteps([newList]);
+    setStepIndex(0);
   };
 
   const performSort = async (
     sortAlgorithm: SortAlgorithm,
     speed = 500
   ): Promise<void> => {
+    // when clicking sorting button again (when already in sort process)
+    if (isSorting.current) {
+      return;
+    }
+
     let steps: SortSteps<IdentifiedNumber>;
 
     switch (sortAlgorithm) {
@@ -49,6 +62,8 @@ function useSortControls(): UseSortControlsReturn {
         return;
     }
 
+    setStepIndex(-1);
+    setSortSteps(steps);
     isSorting.current = true;
 
     for (const step of steps) {
@@ -57,6 +72,7 @@ function useSortControls(): UseSortControlsReturn {
         break;
       }
 
+      setStepIndex((prevIndex) => prevIndex + 1);
       setListState(step);
       await sleep(speed);
     }
@@ -69,7 +85,31 @@ function useSortControls(): UseSortControlsReturn {
     setListState(initedSortStep);
   };
 
-  return { listState, genNewList, performSort, stopSort };
+  const prevStep = (): void => {
+    const index = stepIndex;
+
+    if (index === 0) {
+      return;
+    }
+
+    const updatedStep = sortSteps[index - 1];
+    setListState(updatedStep);
+    setStepIndex((prevIndex) => prevIndex - 1);
+  };
+
+  const nextStep = (): void => {
+    const index = stepIndex;
+
+    if (index === sortSteps.length - 1) {
+      return;
+    }
+
+    const updatedStep = sortSteps[index + 1];
+    setListState(updatedStep);
+    setStepIndex((prevIndex) => prevIndex + 1);
+  };
+
+  return { listState, genNewList, performSort, stopSort, prevStep, nextStep };
 }
 
 export default useSortControls;
