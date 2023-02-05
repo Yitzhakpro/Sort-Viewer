@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { DEFAULT_RANDOM_ARRAY_LENGTH } from "../../constants";
+import {
+  DEFAULT_RANDOM_ARRAY_LENGTH,
+  DEFAULT_SORT_SPEED,
+} from "../../constants";
 import type { SortAlgorithm } from "../../types";
 import "./controlPanel.css";
 
@@ -13,7 +16,7 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
   const { genNewList, performSort, stopSort } = props;
 
   const [length, setLength] = useState(DEFAULT_RANDOM_ARRAY_LENGTH);
-  const [speed, setSpeed] = useState(1000);
+  const [speed, setSpeed] = useState(DEFAULT_SORT_SPEED);
 
   const [algorithm, setAlgorithm] = useState<SortAlgorithm | "">("");
 
@@ -52,6 +55,7 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
       />
 
       <button onClick={() => setAlgorithm("bubbleSort")}>bubbleSort</button>
+      <button onClick={() => setAlgorithm("mergeSort")}>mergeSort</button>
 
       <button onClick={handleStartSort}>Start Sort</button>
       <button onClick={handleStopSort}>Stop Sort</button>

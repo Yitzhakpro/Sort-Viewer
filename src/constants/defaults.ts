@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 
 export const DEFAULT_RANDOM_ARRAY_LENGTH = 5;
+export const DEFAULT_SORT_SPEED = 500;
 
 export const DEFAULT_MIN_RANDOM_NUMBER = 5;
 export const DEFAULT_MAX_RANDOM_NUMBER = 100;
