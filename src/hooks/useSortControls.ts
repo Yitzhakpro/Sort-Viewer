@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { DEFAULT_RANDOM_ARRAY_LENGTH } from "../constants";
 import { initSortStep, generateIdentifiedNumberList, sleep } from "../utils";
-import { bubbleSortWithSteps } from "../algorithms";
+import { bubbleSortWithSteps, mergeSortWithSteps } from "../algorithms";
 import type {
   IdentifiedNumber,
   SortAlgorithm,
@@ -41,6 +41,9 @@ function useSortControls(): UseSortControlsReturn {
     switch (sortAlgorithm) {
       case "bubbleSort":
         steps = bubbleSortWithSteps(listState.array);
+        break;
+      case "mergeSort":
+        steps = mergeSortWithSteps(listState.array);
         break;
       default:
         return;
