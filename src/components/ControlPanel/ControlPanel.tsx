@@ -7,6 +7,8 @@ import type { SortAlgorithm } from "../../types";
 import "./controlPanel.css";
 
 interface IControlPanelProps {
+  stepsCount: number;
+  stepIndex: number;
   genNewList: (length?: number, min?: number, max?: number) => void;
   performSort: (sortAlgorithm: SortAlgorithm, speed?: number) => Promise<void>;
   stopSort: () => void;
@@ -15,12 +17,23 @@ interface IControlPanelProps {
 }
 
 function ControlPanel(props: IControlPanelProps): JSX.Element {
-  const { genNewList, performSort, stopSort, prevStep, nextStep } = props;
+  const {
+    stepsCount,
+    stepIndex,
+    genNewList,
+    performSort,
+    stopSort,
+    prevStep,
+    nextStep,
+  } = props;
 
   const [length, setLength] = useState(DEFAULT_RANDOM_ARRAY_LENGTH);
   const [speed, setSpeed] = useState(DEFAULT_SORT_SPEED);
 
   const [algorithm, setAlgorithm] = useState<SortAlgorithm | "">("");
+
+  const isBackDisabled = stepIndex < 1;
+  const isNextDisabled = stepIndex === stepsCount - 1;
 
   const handleGenNewList = (): void => {
     genNewList(length);
@@ -63,8 +76,12 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
       <button onClick={handleStopSort}>Stop Sort</button>
 
       <div>
-        <button onClick={prevStep}>back</button>
-        <button onClick={nextStep}>next</button>
+        <button disabled={isBackDisabled} onClick={prevStep}>
+          back
+        </button>
+        <button disabled={isNextDisabled} onClick={nextStep}>
+          next
+        </button>
       </div>
     </div>
   );

@@ -11,6 +11,8 @@ import type {
 
 interface UseSortControlsReturn {
   listState: SortStep<IdentifiedNumber>;
+  stepIndex: number;
+  stepsCount: number;
   genNewList: (length?: number, min?: number, max?: number) => void;
   performSort: (sortAlgorithm: SortAlgorithm, speed?: number) => Promise<void>;
   stopSort: () => void;
@@ -109,7 +111,16 @@ function useSortControls(): UseSortControlsReturn {
     setStepIndex((prevIndex) => prevIndex + 1);
   };
 
-  return { listState, genNewList, performSort, stopSort, prevStep, nextStep };
+  return {
+    listState,
+    stepsCount: sortSteps.length,
+    stepIndex,
+    genNewList,
+    performSort,
+    stopSort,
+    prevStep,
+    nextStep,
+  };
 }
 
 export default useSortControls;
