@@ -71,6 +71,7 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
 
       <button onClick={() => setAlgorithm("bubbleSort")}>bubbleSort</button>
       <button onClick={() => setAlgorithm("mergeSort")}>mergeSort</button>
+      <button onClick={() => setAlgorithm("quickSort")}>quickSort</button>
 
       <button onClick={handleStartSort}>Start Sort</button>
       <button onClick={handleStopSort}>Stop Sort</button>

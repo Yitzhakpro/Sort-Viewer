@@ -1,7 +1,11 @@
 import { useState, useRef } from "react";
 import { DEFAULT_RANDOM_ARRAY_LENGTH } from "../constants";
 import { initSortStep, generateIdentifiedNumberList, sleep } from "../utils";
-import { bubbleSortWithSteps, mergeSortWithSteps } from "../algorithms";
+import {
+  bubbleSortWithSteps,
+  mergeSortWithSteps,
+  quickSortWithSteps,
+} from "../algorithms";
 import type {
   IdentifiedNumber,
   SortAlgorithm,
@@ -59,6 +63,9 @@ function useSortControls(): UseSortControlsReturn {
         break;
       case "mergeSort":
         steps = mergeSortWithSteps(listState.array);
+        break;
+      case "quickSort":
+        steps = quickSortWithSteps(listState.array);
         break;
       default:
         return;
