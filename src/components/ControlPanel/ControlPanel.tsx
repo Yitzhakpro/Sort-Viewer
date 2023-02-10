@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { Typography } from "@mui/material";
+import ArraySizeSlider from "../ArraySizeSlider";
+import SpeedSlider from "../SpeedSlider";
 import {
   DEFAULT_RANDOM_ARRAY_LENGTH,
   DEFAULT_SORT_SPEED,
@@ -10,7 +13,7 @@ interface IControlPanelProps {
   stepsCount: number;
   stepIndex: number;
   genNewList: (length?: number, min?: number, max?: number) => void;
-  performSort: (sortAlgorithm: SortAlgorithm, speed?: number) => Promise<void>;
+  performSort: (sortAlgorithm: SortAlgorithm, delay?: number) => Promise<void>;
   stopSort: () => void;
   prevStep: () => void;
   nextStep: () => void;
@@ -39,12 +42,22 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
     genNewList(length);
   };
 
+  const handleLengthChange = (value: number): void => {
+    setLength(value);
+    genNewList(value);
+  };
+
+  const handleSpeedChange = (value: number): void => {
+    setSpeed(value);
+  };
+
   const handleStartSort = async (): Promise<void> => {
     if (!algorithm) {
       return;
     }
 
-    await performSort(algorithm, speed);
+    const delay = Math.abs(speed - 999);
+    await performSort(algorithm, delay);
   };
 
   const handleStopSort = (): void => {
@@ -55,19 +68,15 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
     <div className="control-panel">
       <button onClick={handleGenNewList}>generate new list</button>
 
-      <span>length</span>
-      <input
-        type="number"
-        value={length}
-        onChange={(e) => setLength(parseInt(e.target.value))}
-      />
+      <div className="control-panel-section">
+        <Typography className="control-panel-section-title">length</Typography>
+        <ArraySizeSlider value={length} onChange={handleLengthChange} />
+      </div>
 
-      <span>speed (ms)</span>
-      <input
-        type="number"
-        value={speed}
-        onChange={(e) => setSpeed(parseInt(e.target.value))}
-      />
+      <div className="control-panel-section">
+        <Typography className="control-panel-section-title">speed</Typography>
+        <SpeedSlider value={speed} onChange={handleSpeedChange} />
+      </div>
 
       <button onClick={() => setAlgorithm("bubbleSort")}>bubbleSort</button>
       <button onClick={() => setAlgorithm("mergeSort")}>mergeSort</button>

@@ -18,7 +18,7 @@ interface UseSortControlsReturn {
   stepIndex: number;
   stepsCount: number;
   genNewList: (length?: number, min?: number, max?: number) => void;
-  performSort: (sortAlgorithm: SortAlgorithm, speed?: number) => Promise<void>;
+  performSort: (sortAlgorithm: SortAlgorithm, delay?: number) => Promise<void>;
   stopSort: () => void;
   prevStep: () => void;
   nextStep: () => void;
@@ -48,7 +48,7 @@ function useSortControls(): UseSortControlsReturn {
 
   const performSort = async (
     sortAlgorithm: SortAlgorithm,
-    speed = 500
+    delay = 500
   ): Promise<void> => {
     // when clicking sorting button again (when already in sort process)
     if (isSorting.current) {
@@ -83,7 +83,7 @@ function useSortControls(): UseSortControlsReturn {
 
       setStepIndex((prevIndex) => prevIndex + 1);
       setListState(step);
-      await sleep(speed);
+      await sleep(delay);
     }
   };
 
