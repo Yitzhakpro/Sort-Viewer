@@ -1,6 +1,6 @@
-export type SortAlgorithm = "bubbleSort" | "mergeSort";
+export type SortAlgorithm = "bubbleSort" | "mergeSort" | "quickSort";
 
-export type ColorMappingType = "CHECK" | "SWAPPING" | "SORTED";
+export type ColorMappingType = "CHECK" | "PIVOT" | "SWAPPING" | "SORTED";
 
 export interface ColorMapping {
   [index: number]: ColorMappingType;
