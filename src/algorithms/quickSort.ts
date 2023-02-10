@@ -1,5 +1,6 @@
 import { createSortStep, initSortStep } from "../utils";
 import type {
+  ColorMapping,
   IdentifiedNumber,
   IdentifiedNumberList,
   SortSteps,
@@ -18,11 +19,15 @@ function partition(
   for (let j = left; j <= right - 1; j++) {
     const checkIndexI = i < 0 ? 0 : i;
     steps.push(
-      createSortStep(arr, {
-        [checkIndexI]: "CHECK",
-        [j]: "CHECK",
-        [right]: "PIVOT",
-      })
+      createSortStep(
+        arr,
+        {
+          [checkIndexI]: "CHECK",
+          [j]: "CHECK",
+          [right]: "PIVOT",
+        },
+        { ...steps.at(-1)?.permanentColorMapping }
+      )
     );
 
     if (arr[j].number < pivot.number) {
@@ -34,25 +39,37 @@ function partition(
       }
 
       steps.push(
-        createSortStep(arr, { [i]: "CHECK", [j]: "CHECK", [right]: "PIVOT" })
+        createSortStep(
+          arr,
+          { [i]: "CHECK", [j]: "CHECK", [right]: "PIVOT" },
+          { ...steps.at(-1)?.permanentColorMapping }
+        )
       );
 
       steps.push(
-        createSortStep(arr, {
-          [i]: "SWAPPING",
-          [j]: "SWAPPING",
-          [right]: "PIVOT",
-        })
+        createSortStep(
+          arr,
+          {
+            [i]: "SWAPPING",
+            [j]: "SWAPPING",
+            [right]: "PIVOT",
+          },
+          { ...steps.at(-1)?.permanentColorMapping }
+        )
       );
       const temp = arr[i];
       arr[i] = arr[j];
       arr[j] = temp;
       steps.push(
-        createSortStep(arr, {
-          [i]: "SWAPPING",
-          [j]: "SWAPPING",
-          [right]: "PIVOT",
-        })
+        createSortStep(
+          arr,
+          {
+            [i]: "SWAPPING",
+            [j]: "SWAPPING",
+            [right]: "PIVOT",
+          },
+          { ...steps.at(-1)?.permanentColorMapping }
+        )
       );
     }
   }
@@ -60,19 +77,27 @@ function partition(
   // Swapping and 'marking' only if its not the same index
   if (i + 1 !== right) {
     steps.push(
-      createSortStep(arr, {
-        [i + 1]: "SWAPPING",
-        [right]: "SWAPPING",
-      })
+      createSortStep(
+        arr,
+        {
+          [i + 1]: "SWAPPING",
+          [right]: "SWAPPING",
+        },
+        { ...steps.at(-1)?.permanentColorMapping }
+      )
     );
     const temp = arr[i + 1];
     arr[i + 1] = arr[right];
     arr[right] = temp;
     steps.push(
-      createSortStep(arr, {
-        [i + 1]: "SWAPPING",
-        [right]: "SWAPPING",
-      })
+      createSortStep(
+        arr,
+        {
+          [i + 1]: "SWAPPING",
+          [right]: "SWAPPING",
+        },
+        { ...steps.at(-1)?.permanentColorMapping }
+      )
     );
   }
 
@@ -90,6 +115,21 @@ function quickSort(
 
     quickSort(arr, left, partitionIndex - 1, steps);
     quickSort(arr, partitionIndex + 1, right, steps);
+  } else {
+    if (right >= 0) {
+      const sortedMapping: ColorMapping = {};
+      for (let i = 0; i <= right; i++) {
+        sortedMapping[i] = "SORTED";
+      }
+
+      steps.push(
+        createSortStep(
+          arr,
+          {},
+          { ...steps.at(-1)?.permanentColorMapping, ...sortedMapping }
+        )
+      );
+    }
   }
 }
 
