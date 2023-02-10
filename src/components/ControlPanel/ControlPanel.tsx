@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Typography } from "@mui/material";
+import { ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import ArraySizeSlider from "../ArraySizeSlider";
 import SpeedSlider from "../SpeedSlider";
 import {
@@ -33,13 +33,24 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
   const [length, setLength] = useState(DEFAULT_RANDOM_ARRAY_LENGTH);
   const [speed, setSpeed] = useState(DEFAULT_SORT_SPEED);
 
-  const [algorithm, setAlgorithm] = useState<SortAlgorithm | "">("");
+  const [algorithm, setAlgorithm] = useState<SortAlgorithm>("quickSort");
 
   const isBackDisabled = stepIndex < 1;
   const isNextDisabled = stepIndex === stepsCount - 1;
 
   const handleGenNewList = (): void => {
     genNewList(length);
+  };
+
+  const handleChangeAlgorithm = (
+    _event: React.MouseEvent<HTMLElement, MouseEvent>,
+    value: SortAlgorithm
+  ): void => {
+    if (!value) {
+      return;
+    }
+
+    setAlgorithm(value);
   };
 
   const handleLengthChange = (value: number): void => {
@@ -66,7 +77,27 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
 
   return (
     <div className="control-panel">
-      <button onClick={handleGenNewList}>generate new list</button>
+      <div className="control-panel-section">
+        <button onClick={handleGenNewList}>generate new list</button>
+
+        <ToggleButtonGroup
+          color="primary"
+          size="small"
+          exclusive
+          value={algorithm}
+          onChange={handleChangeAlgorithm}
+        >
+          <ToggleButton color="primary" value="bubbleSort">
+            Bubble Sort
+          </ToggleButton>
+          <ToggleButton color="primary" value="mergeSort">
+            Merge Sort
+          </ToggleButton>
+          <ToggleButton color="primary" value="quickSort">
+            Quick Sort
+          </ToggleButton>
+        </ToggleButtonGroup>
+      </div>
 
       <div className="control-panel-section">
         <Typography className="control-panel-section-title">length</Typography>
@@ -77,10 +108,6 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
         <Typography className="control-panel-section-title">speed</Typography>
         <SpeedSlider value={speed} onChange={handleSpeedChange} />
       </div>
-
-      <button onClick={() => setAlgorithm("bubbleSort")}>bubbleSort</button>
-      <button onClick={() => setAlgorithm("mergeSort")}>mergeSort</button>
-      <button onClick={() => setAlgorithm("quickSort")}>quickSort</button>
 
       <button onClick={handleStartSort}>Start Sort</button>
       <button onClick={handleStopSort}>Stop Sort</button>
