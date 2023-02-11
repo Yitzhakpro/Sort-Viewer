@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AutorenewIcon from "@mui/icons-material/Autorenew";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import StopIcon from "@mui/icons-material/Stop";
 import {
@@ -9,7 +10,6 @@ import {
 } from "@mui/material";
 import { Button } from "../../utilComponents";
 import ArraySizeSlider from "../ArraySizeSlider";
-import GenerateListButton from "../GenerateListButton";
 import SpeedSlider from "../SpeedSlider";
 import {
   DEFAULT_RANDOM_ARRAY_LENGTH,
@@ -88,7 +88,13 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
   return (
     <div className="control-panel">
       <div className="control-panel-section sort-buttons">
-        <GenerateListButton generateNewList={handleGenNewList} />
+        <Button
+          startIcon={<AutorenewIcon />}
+          variant="outlined"
+          onClick={handleGenNewList}
+        >
+          <Typography>Re-Generate List</Typography>
+        </Button>
 
         <ToggleButtonGroup
           color="primary"
@@ -99,7 +105,7 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
         >
           {LABLED_ALGORITHMS.map((labledAlgo) => {
             return (
-              <ToggleButton value={labledAlgo.value}>
+              <ToggleButton key={labledAlgo.value} value={labledAlgo.value}>
                 {labledAlgo.label}
               </ToggleButton>
             );
@@ -108,7 +114,7 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
 
         <ButtonGroup variant="contained">
           <Button size="small" disabled={isBackDisabled} onClick={prevStep}>
-            Previous Step
+            Back
           </Button>
           <Button onClick={handleStartSort}>
             <PlayArrowIcon />
@@ -117,7 +123,7 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
             <StopIcon />
           </Button>
           <Button size="small" disabled={isNextDisabled} onClick={nextStep}>
-            Next Step
+            Next
           </Button>
         </ButtonGroup>
       </div>
