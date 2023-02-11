@@ -6,6 +6,7 @@ function App() {
     listState,
     stepsCount,
     stepIndex,
+    isSorting,
     genNewList,
     performSort,
     stopSort,
@@ -19,6 +20,7 @@ function App() {
       <ControlPanel
         stepsCount={stepsCount}
         stepIndex={stepIndex}
+        isSorting={isSorting}
         genNewList={genNewList}
         performSort={performSort}
         stopSort={stopSort}

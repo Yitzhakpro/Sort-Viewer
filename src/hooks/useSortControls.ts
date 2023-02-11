@@ -17,6 +17,7 @@ interface UseSortControlsReturn {
   listState: SortStep<IdentifiedNumber>;
   stepIndex: number;
   stepsCount: number;
+  isSorting: React.MutableRefObject<boolean>;
   genNewList: (length?: number, min?: number, max?: number) => void;
   performSort: (sortAlgorithm: SortAlgorithm, delay?: number) => Promise<void>;
   stopSort: () => void;
@@ -122,6 +123,7 @@ function useSortControls(): UseSortControlsReturn {
     listState,
     stepsCount: sortSteps.length,
     stepIndex,
+    isSorting,
     genNewList,
     performSort,
     stopSort,
