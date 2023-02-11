@@ -6,6 +6,7 @@ import SpeedSlider from "../SpeedSlider";
 import {
   DEFAULT_RANDOM_ARRAY_LENGTH,
   DEFAULT_SORT_SPEED,
+  LABLED_ALGORITHMS,
 } from "../../constants";
 import type { SortAlgorithm } from "../../types";
 import "./controlPanel.css";
@@ -88,15 +89,13 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
           value={algorithm}
           onChange={handleChangeAlgorithm}
         >
-          <ToggleButton color="primary" value="bubbleSort">
-            Bubble Sort
-          </ToggleButton>
-          <ToggleButton color="primary" value="mergeSort">
-            Merge Sort
-          </ToggleButton>
-          <ToggleButton color="primary" value="quickSort">
-            Quick Sort
-          </ToggleButton>
+          {LABLED_ALGORITHMS.map((labledAlgo) => {
+            return (
+              <ToggleButton value={labledAlgo.value}>
+                {labledAlgo.label}
+              </ToggleButton>
+            );
+          })}
         </ToggleButtonGroup>
       </div>
 
