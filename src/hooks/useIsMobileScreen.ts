@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import { isMobileScreen } from "../utils";
 
 function useIsMobileScreen(): boolean {
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(
+    isMobileScreen(window.innerHeight, window.innerWidth)
+  );
 
   useEffect(() => {
     function handleResize(): void {
