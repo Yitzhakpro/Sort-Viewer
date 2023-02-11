@@ -3,7 +3,7 @@ import {
   DEFAULT_MAX_RANDOM_NUMBER,
   DEFAULT_LIST_ITEM_COLOR,
 } from "../../constants";
-import { isMobileScreen } from "../../utils";
+import { useIsMobileScreen } from "../../hooks";
 import "./listItem.css";
 
 const swappingAnimation: Transition = {
@@ -22,10 +22,12 @@ interface IListItemProps {
 function ListItem(props: IListItemProps): JSX.Element {
   const { id, number, listLength, color = DEFAULT_LIST_ITEM_COLOR } = props;
 
+  const isMobileScreen = useIsMobileScreen();
+
   const heightPrecentage = (number * 100) / DEFAULT_MAX_RANDOM_NUMBER;
   const widthPrecentage = (1 * 100) / listLength;
 
-  const shouldDisplayNumber = !isMobileScreen() && listLength < 25;
+  const shouldDisplayNumber = !isMobileScreen && listLength < 25;
 
   return (
     <motion.div

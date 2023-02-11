@@ -1,3 +1,6 @@
-export const isMobileScreen = (): boolean => {
-  return Math.min(window.screen.width, window.screen.height) < 768;
+export const isMobileScreen = (
+  screenHeight: number,
+  screenWidth: number
+): boolean => {
+  return Math.min(screenWidth, screenHeight) < 750;
 };
