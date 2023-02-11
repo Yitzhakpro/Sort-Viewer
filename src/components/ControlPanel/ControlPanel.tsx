@@ -130,12 +130,12 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
       </div>
 
       <div className="control-panel-section">
-        <Typography className="control-panel-section-title">length</Typography>
+        <Typography className="control-panel-section-title">Length</Typography>
         <ArraySizeSlider value={length} onChange={handleLengthChange} />
       </div>
 
       <div className="control-panel-section">
-        <Typography className="control-panel-section-title">speed</Typography>
+        <Typography className="control-panel-section-title">Speed</Typography>
         <SpeedSlider value={speed} onChange={handleSpeedChange} />
       </div>
     </div>
