@@ -1,6 +1,5 @@
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import { Button } from "../../utilComponents";
-import "./generateListButton.css";
 
 interface IGenerateListButtonProps {
   generateNewList: () => void;

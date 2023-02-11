@@ -21,6 +21,10 @@
   align-items: center;
 }
 
+.control-panel-section.sort-buttons > * {
+  margin: 0 1%;
+}
+
 p.control-panel-section-title {
   margin-right: 1%;
 }

@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import StopIcon from "@mui/icons-material/Stop";
+import {
+  ButtonGroup,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography,
+} from "@mui/material";
+import { Button } from "../../utilComponents";
 import ArraySizeSlider from "../ArraySizeSlider";
 import GenerateListButton from "../GenerateListButton";
 import SpeedSlider from "../SpeedSlider";
@@ -79,7 +87,7 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
 
   return (
     <div className="control-panel">
-      <div className="control-panel-section">
+      <div className="control-panel-section sort-buttons">
         <GenerateListButton generateNewList={handleGenNewList} />
 
         <ToggleButtonGroup
@@ -97,6 +105,21 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
             );
           })}
         </ToggleButtonGroup>
+
+        <ButtonGroup variant="contained">
+          <Button size="small" disabled={isBackDisabled} onClick={prevStep}>
+            Previous Step
+          </Button>
+          <Button onClick={handleStartSort}>
+            <PlayArrowIcon />
+          </Button>
+          <Button onClick={handleStopSort}>
+            <StopIcon />
+          </Button>
+          <Button size="small" disabled={isNextDisabled} onClick={nextStep}>
+            Next Step
+          </Button>
+        </ButtonGroup>
       </div>
 
       <div className="control-panel-section">
@@ -107,18 +130,6 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
       <div className="control-panel-section">
         <Typography className="control-panel-section-title">speed</Typography>
         <SpeedSlider value={speed} onChange={handleSpeedChange} />
-      </div>
-
-      <button onClick={handleStartSort}>Start Sort</button>
-      <button onClick={handleStopSort}>Stop Sort</button>
-
-      <div>
-        <button disabled={isBackDisabled} onClick={prevStep}>
-          back
-        </button>
-        <button disabled={isNextDisabled} onClick={nextStep}>
-          next
-        </button>
       </div>
     </div>
   );
