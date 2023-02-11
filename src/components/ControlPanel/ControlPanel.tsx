@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import ArraySizeSlider from "../ArraySizeSlider";
+import GenerateListButton from "../GenerateListButton";
 import SpeedSlider from "../SpeedSlider";
 import {
   DEFAULT_RANDOM_ARRAY_LENGTH,
@@ -78,7 +79,7 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
   return (
     <div className="control-panel">
       <div className="control-panel-section">
-        <button onClick={handleGenNewList}>generate new list</button>
+        <GenerateListButton generateNewList={handleGenNewList} />
 
         <ToggleButtonGroup
           color="primary"
