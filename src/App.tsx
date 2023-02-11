@@ -1,5 +1,5 @@
 import { ControlPanel, SortingContainer } from "./components";
-import useSortControls from "./hooks";
+import { useSortControls } from "./hooks";
 
 function App() {
   const {
