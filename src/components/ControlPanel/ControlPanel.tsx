@@ -22,6 +22,7 @@ import "./controlPanel.css";
 interface IControlPanelProps {
   stepsCount: number;
   stepIndex: number;
+  isSorting: React.MutableRefObject<boolean>;
   genNewList: (length?: number, min?: number, max?: number) => void;
   performSort: (sortAlgorithm: SortAlgorithm, delay?: number) => Promise<void>;
   stopSort: () => void;
@@ -33,6 +34,7 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
   const {
     stepsCount,
     stepIndex,
+    isSorting,
     genNewList,
     performSort,
     stopSort,
@@ -45,8 +47,10 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
 
   const [algorithm, setAlgorithm] = useState<SortAlgorithm>("quickSort");
 
-  const isBackDisabled = stepIndex < 1;
-  const isNextDisabled = stepIndex === stepsCount - 1;
+  const isRunDisabled = isSorting.current;
+  const isStopDisabled = !isSorting.current;
+  const isBackDisabled = isSorting.current || stepIndex < 1;
+  const isNextDisabled = isSorting.current || stepIndex === stepsCount - 1;
 
   const handleGenNewList = (): void => {
     genNewList(length);
@@ -117,10 +121,10 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
           <Button size="small" disabled={isBackDisabled} onClick={prevStep}>
             Back
           </Button>
-          <Button onClick={handleStartSort}>
+          <Button disabled={isRunDisabled} onClick={handleStartSort}>
             <PlayArrowIcon />
           </Button>
-          <Button onClick={handleStopSort}>
+          <Button disabled={isStopDisabled} onClick={handleStopSort}>
             <StopIcon />
           </Button>
           <Button size="small" disabled={isNextDisabled} onClick={nextStep}>
