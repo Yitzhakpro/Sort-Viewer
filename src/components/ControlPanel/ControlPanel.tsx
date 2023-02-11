@@ -91,9 +91,10 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
         <Button
           startIcon={<AutorenewIcon />}
           variant="outlined"
+          size="small"
           onClick={handleGenNewList}
         >
-          <Typography>Re-Generate List</Typography>
+          Re-Generate List
         </Button>
 
         <ToggleButtonGroup
