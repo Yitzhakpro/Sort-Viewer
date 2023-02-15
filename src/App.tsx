@@ -1,5 +1,6 @@
 import { ControlPanel, SortingContainer } from "./components";
 import { useSortControls } from "./hooks";
+import { CustomThemeProvider } from "./providers";
 
 function App() {
   const {
@@ -15,7 +16,7 @@ function App() {
   } = useSortControls();
 
   return (
-    <>
+    <CustomThemeProvider>
       <SortingContainer listState={listState} />
       <ControlPanel
         stepsCount={stepsCount}
@@ -27,7 +28,7 @@ function App() {
         prevStep={prevStep}
         nextStep={nextStep}
       />
-    </>
+    </CustomThemeProvider>
   );
 }
 

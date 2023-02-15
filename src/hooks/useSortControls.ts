@@ -86,6 +86,8 @@ function useSortControls(): UseSortControlsReturn {
       setListState(step);
       await sleep(delay);
     }
+
+    // TODO: fix bug when stop button still appear to be clickable
   };
 
   const stopSort = (): void => {
