@@ -94,7 +94,7 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
       <div className="control-panel-section sort-buttons">
         <Button
           startIcon={<AutorenewIcon />}
-          variant="outlined"
+          variant="contained"
           size="small"
           onClick={handleGenNewList}
         >
