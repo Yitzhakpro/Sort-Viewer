@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import { DEFAULT_RANDOM_ARRAY_LENGTH } from "../constants";
 import { initSortStep, generateIdentifiedNumberList, sleep } from "../utils";
 import {
@@ -17,7 +17,7 @@ interface UseSortControlsReturn {
   listState: SortStep<IdentifiedNumber>;
   stepIndex: number;
   stepsCount: number;
-  isSorting: React.MutableRefObject<boolean>;
+  isSorting: boolean;
   genNewList: (length?: number, min?: number, max?: number) => void;
   performSort: (sortAlgorithm: SortAlgorithm, delay?: number) => Promise<void>;
   stopSort: () => void;
@@ -34,11 +34,21 @@ function useSortControls(): UseSortControlsReturn {
   ]);
   const [stepIndex, setStepIndex] = useState(0);
 
-  const isSorting = useRef(false);
+  const [isSorting, setIsSorting] = useState(false);
+  const isSortingRef = useRef(false);
+
+  const toggleIsSorting = (currentlySorting: boolean): void => {
+    /*
+      using ref for mid function checking (because we can't see state change mid-function)
+      and state for exporting it out of the hook for start/end of sorting
+    */
+    setIsSorting(currentlySorting);
+    isSortingRef.current = currentlySorting;
+  };
 
   const genNewList = (length = DEFAULT_RANDOM_ARRAY_LENGTH): void => {
     // stopping current sorting
-    isSorting.current = false;
+    toggleIsSorting(false);
 
     const newList = initSortStep(generateIdentifiedNumberList(length));
 
@@ -52,7 +62,7 @@ function useSortControls(): UseSortControlsReturn {
     delay = 500
   ): Promise<void> => {
     // when clicking sorting button again (when already in sort process)
-    if (isSorting.current) {
+    if (isSortingRef.current) {
       return;
     }
 
@@ -60,13 +70,13 @@ function useSortControls(): UseSortControlsReturn {
 
     switch (sortAlgorithm) {
       case "bubbleSort":
-        steps = bubbleSortWithSteps(listState.array);
+        steps = bubbleSortWithSteps([...listState.array]);
         break;
       case "mergeSort":
-        steps = mergeSortWithSteps(listState.array);
+        steps = mergeSortWithSteps([...listState.array]);
         break;
       case "quickSort":
-        steps = quickSortWithSteps(listState.array);
+        steps = quickSortWithSteps([...listState.array]);
         break;
       default:
         return;
@@ -74,11 +84,11 @@ function useSortControls(): UseSortControlsReturn {
 
     setStepIndex(-1);
     setSortSteps(steps);
-    isSorting.current = true;
+    toggleIsSorting(true);
 
     for (const step of steps) {
       // if stoping the sort, breaking out of the steps loop
-      if (!isSorting.current) {
+      if (!isSortingRef.current) {
         break;
       }
 
@@ -87,11 +97,11 @@ function useSortControls(): UseSortControlsReturn {
       await sleep(delay);
     }
 
-    // TODO: fix bug when stop button still appear to be clickable
+    toggleIsSorting(false);
   };
 
   const stopSort = (): void => {
-    isSorting.current = false;
+    toggleIsSorting(false);
 
     const initedSortStep = initSortStep(listState.array);
     setListState(initedSortStep);
