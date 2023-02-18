@@ -22,7 +22,7 @@ import "./controlPanel.css";
 interface IControlPanelProps {
   stepsCount: number;
   stepIndex: number;
-  isSorting: React.MutableRefObject<boolean>;
+  isSorting: boolean;
   genNewList: (length?: number, min?: number, max?: number) => void;
   performSort: (sortAlgorithm: SortAlgorithm, delay?: number) => Promise<void>;
   stopSort: () => void;
@@ -47,10 +47,10 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
 
   const [algorithm, setAlgorithm] = useState<SortAlgorithm>("quickSort");
 
-  const isRunDisabled = isSorting.current;
-  const isStopDisabled = !isSorting.current;
-  const isBackDisabled = isSorting.current || stepIndex < 1;
-  const isNextDisabled = isSorting.current || stepIndex === stepsCount - 1;
+  const isRunDisabled = isSorting;
+  const isStopDisabled = !isSorting;
+  const isBackDisabled = isSorting || stepIndex < 1;
+  const isNextDisabled = isSorting || stepIndex === stepsCount - 1;
 
   const handleGenNewList = (): void => {
     genNewList(length);
