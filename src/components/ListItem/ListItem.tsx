@@ -12,7 +12,7 @@ const swappingAnimation: Transition = {
   stiffness: 400,
 };
 
-interface IListItemProps {
+export interface IListItemProps {
   id: string;
   number: number;
   listLength: number;
@@ -40,7 +40,11 @@ function ListItem(props: IListItemProps): JSX.Element {
       layout
       transition={swappingAnimation}
     >
-      <div className="list-item-color" style={{ backgroundColor: color }}>
+      <div
+        className="list-item-color"
+        data-testid={`list-item-color-${number}`}
+        style={{ backgroundColor: color }}
+      >
         {shouldDisplayNumber && <p className="list-item-number">{number}</p>}
       </div>
     </motion.div>
