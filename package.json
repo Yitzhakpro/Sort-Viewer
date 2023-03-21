@@ -2,6 +2,7 @@
   "name": "sort-viewer",
   "private": true,
   "version": "1.1.1",
+  "homepage": "https://yitzhakpro.github.io/Sort-Viewer/",
   "type": "module",
   "scripts": {
     "dev": "vite",
