@@ -11,16 +11,15 @@ jobs:
   test-and-build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x, 18.x]
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v3
-      - name: Using Node.js ${{ matrix.node-version }}
+      - name: Using Node.js 16
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '16'
 
       - name: Installing Deps
         run: yarn --frozen-lockfile
