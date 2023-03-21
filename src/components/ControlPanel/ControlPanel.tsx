@@ -19,7 +19,7 @@ import {
 import type { SortAlgorithm } from "../../types";
 import "./controlPanel.css";
 
-interface IControlPanelProps {
+export interface IControlPanelProps {
   stepsCount: number;
   stepIndex: number;
   isSorting: boolean;
@@ -118,16 +118,34 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
         </ToggleButtonGroup>
 
         <ButtonGroup variant="contained">
-          <Button size="small" disabled={isBackDisabled} onClick={prevStep}>
+          <Button
+            data-testid="back-button"
+            size="small"
+            disabled={isBackDisabled}
+            onClick={prevStep}
+          >
             Back
           </Button>
-          <Button disabled={isRunDisabled} onClick={handleStartSort}>
+          <Button
+            data-testid="run-button"
+            disabled={isRunDisabled}
+            onClick={handleStartSort}
+          >
             <PlayArrowIcon />
           </Button>
-          <Button disabled={isStopDisabled} onClick={handleStopSort}>
+          <Button
+            data-testid="stop-button"
+            disabled={isStopDisabled}
+            onClick={handleStopSort}
+          >
             <StopIcon />
           </Button>
-          <Button size="small" disabled={isNextDisabled} onClick={nextStep}>
+          <Button
+            data-testid="next-button"
+            size="small"
+            disabled={isNextDisabled}
+            onClick={nextStep}
+          >
             Next
           </Button>
         </ButtonGroup>

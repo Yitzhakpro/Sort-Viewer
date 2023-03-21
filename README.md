@@ -91,6 +91,8 @@ element that needs to be colored, will be colored according to the `color mappin
 
 # 💻 Develop / Setup
 
+**⚠️ This project requires Node.js >= 16.6**
+
 Clone the project:
 
 ```console
