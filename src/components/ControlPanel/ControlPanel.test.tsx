@@ -1,5 +1,6 @@
 import { render } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
+import { CustomThemeProvider } from "../../providers";
 import ControlPanel, { IControlPanelProps } from "./ControlPanel";
 import "@testing-library/jest-dom";
 
@@ -17,7 +18,11 @@ function renderControlPanel(props?: Partial<IControlPanelProps>): JSX.Element {
     nextStep: () => {},
   };
 
-  return <ControlPanel {...defaultControlPanelProps} {...props} />;
+  return (
+    <CustomThemeProvider>
+      <ControlPanel {...defaultControlPanelProps} {...props} />
+    </CustomThemeProvider>
+  );
 }
 
 describe("Control Panel", () => {

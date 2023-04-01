@@ -4,9 +4,11 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import StopIcon from "@mui/icons-material/Stop";
 import {
   ButtonGroup,
+  Stack,
   ToggleButton,
   ToggleButtonGroup,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { Button } from "../../utilComponents";
 import ArraySizeSlider from "../ArraySizeSlider";
@@ -52,6 +54,10 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
   const isBackDisabled = isSorting || stepIndex < 1;
   const isNextDisabled = isSorting || stepIndex === stepsCount - 1;
 
+  const isFullWidthControls = useMediaQuery((theme: any) =>
+    theme.breakpoints.down("md")
+  );
+
   const handleGenNewList = (): void => {
     genNewList(length);
   };
@@ -91,11 +97,17 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
 
   return (
     <div className="control-panel">
-      <div className="control-panel-section sort-buttons">
+      <Stack
+        justifyContent="center"
+        alignItems="center"
+        direction={{ xs: "column", md: "row" }}
+        spacing={{ xs: 1, md: 6 }}
+      >
         <Button
           startIcon={<AutorenewIcon />}
           variant="contained"
           size="small"
+          fullWidth={isFullWidthControls}
           onClick={handleGenNewList}
         >
           Re-Generate List
@@ -104,6 +116,7 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
         <ToggleButtonGroup
           color="primary"
           size="small"
+          fullWidth={isFullWidthControls}
           exclusive
           value={algorithm}
           onChange={handleChangeAlgorithm}
@@ -117,7 +130,7 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
           })}
         </ToggleButtonGroup>
 
-        <ButtonGroup variant="contained">
+        <ButtonGroup variant="contained" fullWidth={isFullWidthControls}>
           <Button
             data-testid="back-button"
             size="small"
@@ -149,7 +162,7 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
             Next
           </Button>
         </ButtonGroup>
-      </div>
+      </Stack>
 
       <div className="control-panel-section">
         <Typography className="control-panel-section-title">Length</Typography>
