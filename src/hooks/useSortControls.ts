@@ -3,6 +3,7 @@ import { DEFAULT_RANDOM_ARRAY_LENGTH } from "../constants";
 import { initSortStep, generateIdentifiedNumberList, sleep } from "../utils";
 import {
   bubbleSortWithSteps,
+  insertionSortWithSteps,
   mergeSortWithSteps,
   quickSortWithSteps,
 } from "../algorithms";
@@ -71,6 +72,9 @@ function useSortControls(): UseSortControlsReturn {
     switch (sortAlgorithm) {
       case "bubbleSort":
         steps = bubbleSortWithSteps([...listState.array]);
+        break;
+      case "insertionSort":
+        steps = insertionSortWithSteps([...listState.array]);
         break;
       case "mergeSort":
         steps = mergeSortWithSteps([...listState.array]);
