@@ -1,4 +1,8 @@
-export type SortAlgorithm = "bubbleSort" | "mergeSort" | "quickSort";
+export type SortAlgorithm =
+  | "bubbleSort"
+  | "insertionSort"
+  | "mergeSort"
+  | "quickSort";
 
 export type ColorMappingType = "CHECK" | "PIVOT" | "SWAPPING" | "SORTED";
 
