@@ -1,6 +1,7 @@
 export type SortAlgorithm =
   | "bubbleSort"
   | "insertionSort"
+  | "selectionSort"
   | "mergeSort"
   | "quickSort";
 

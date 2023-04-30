@@ -2,21 +2,14 @@ import { useState } from "react";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import StopIcon from "@mui/icons-material/Stop";
-import {
-  ButtonGroup,
-  Stack,
-  ToggleButton,
-  ToggleButtonGroup,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import { ButtonGroup, Stack, Typography, useMediaQuery } from "@mui/material";
 import { Button } from "../../utilComponents";
+import AlgorithmSelector from "../AlgorithmSelector";
 import ArraySizeSlider from "../ArraySizeSlider";
 import SpeedSlider from "../SpeedSlider";
 import {
   DEFAULT_RANDOM_ARRAY_LENGTH,
   DEFAULT_SORT_SPEED,
-  LABLED_ALGORITHMS,
 } from "../../constants";
 import type { SortAlgorithm } from "../../types";
 import "./controlPanel.css";
@@ -62,10 +55,7 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
     genNewList(length);
   };
 
-  const handleChangeAlgorithm = (
-    _event: React.MouseEvent<HTMLElement, MouseEvent>,
-    value: SortAlgorithm
-  ): void => {
+  const handleChangeAlgorithm = (value: SortAlgorithm): void => {
     if (!value) {
       return;
     }
@@ -113,22 +103,10 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
           Re-Generate List
         </Button>
 
-        <ToggleButtonGroup
-          color="primary"
-          size="small"
-          fullWidth={isFullWidthControls}
-          exclusive
-          value={algorithm}
-          onChange={handleChangeAlgorithm}
-        >
-          {LABLED_ALGORITHMS.map((labledAlgo) => {
-            return (
-              <ToggleButton key={labledAlgo.value} value={labledAlgo.value}>
-                {labledAlgo.label}
-              </ToggleButton>
-            );
-          })}
-        </ToggleButtonGroup>
+        <AlgorithmSelector
+          algorithm={algorithm}
+          onAlgorithmChange={handleChangeAlgorithm}
+        />
 
         <ButtonGroup variant="contained" fullWidth={isFullWidthControls}>
           <Button
