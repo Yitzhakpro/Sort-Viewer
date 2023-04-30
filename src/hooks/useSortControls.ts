@@ -4,6 +4,7 @@ import { initSortStep, generateIdentifiedNumberList, sleep } from "../utils";
 import {
   bubbleSortWithSteps,
   insertionSortWithSteps,
+  selectionSortWithSteps,
   mergeSortWithSteps,
   quickSortWithSteps,
 } from "../algorithms";
@@ -75,6 +76,9 @@ function useSortControls(): UseSortControlsReturn {
         break;
       case "insertionSort":
         steps = insertionSortWithSteps([...listState.array]);
+        break;
+      case "selectionSort":
+        steps = selectionSortWithSteps([...listState.array]);
         break;
       case "mergeSort":
         steps = mergeSortWithSteps([...listState.array]);
