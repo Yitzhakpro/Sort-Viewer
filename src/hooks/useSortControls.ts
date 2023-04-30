@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { DEFAULT_RANDOM_ARRAY_LENGTH } from "../constants";
+import { DEFAULT_RANDOM_ARRAY_LENGTH, ALGO_FUNCTIONS } from "../constants";
 import { initSortStep, generateIdentifiedNumberList, sleep } from "../utils";
 import {
   bubbleSortWithSteps,
@@ -68,27 +68,7 @@ function useSortControls(): UseSortControlsReturn {
       return;
     }
 
-    let steps: SortSteps<IdentifiedNumber>;
-
-    switch (sortAlgorithm) {
-      case "bubbleSort":
-        steps = bubbleSortWithSteps([...listState.array]);
-        break;
-      case "insertionSort":
-        steps = insertionSortWithSteps([...listState.array]);
-        break;
-      case "selectionSort":
-        steps = selectionSortWithSteps([...listState.array]);
-        break;
-      case "mergeSort":
-        steps = mergeSortWithSteps([...listState.array]);
-        break;
-      case "quickSort":
-        steps = quickSortWithSteps([...listState.array]);
-        break;
-      default:
-        return;
-    }
+    const steps = ALGO_FUNCTIONS[sortAlgorithm]([...listState.array]);
 
     setStepIndex(-1);
     setSortSteps(steps);
