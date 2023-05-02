@@ -1,19 +1,20 @@
-import List from "../List";
-import type { IdentifiedNumber, SortStep } from "../../types";
-import "./sortingContainer.css";
+import React from 'react';
+import List from '../List';
+import type { IdentifiedNumber, SortStep } from '../../types';
+import './sortingContainer.css';
 
 interface ISortingContainerProps {
-  listState: SortStep<IdentifiedNumber>;
+	listState: SortStep<IdentifiedNumber>;
 }
 
 function SortingContainer(props: ISortingContainerProps): JSX.Element {
-  const { listState } = props;
+	const { listState } = props;
 
-  return (
-    <div className="sorting-container">
-      <List listState={listState} />
-    </div>
-  );
+	return (
+		<div className="sorting-container">
+			<List listState={listState} />
+		</div>
+	);
 }
 
 export default SortingContainer;

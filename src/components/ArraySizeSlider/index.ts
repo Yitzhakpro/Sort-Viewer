@@ -1,3 +1,3 @@
-import ArraySizeSlider from "./ArraySizeSlider";
+import ArraySizeSlider from './ArraySizeSlider';
 
 export default ArraySizeSlider;

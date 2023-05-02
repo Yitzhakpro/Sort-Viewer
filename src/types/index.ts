@@ -1,2 +1,2 @@
-export * from "./sortList.types";
-export * from "./sortVisualization.types";
+export * from './sortList.types';
+export * from './sortVisualization.types';

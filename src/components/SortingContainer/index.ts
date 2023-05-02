@@ -1,3 +1,3 @@
-import SortingContainer from "./SortingContainer";
+import SortingContainer from './SortingContainer';
 
 export default SortingContainer;
