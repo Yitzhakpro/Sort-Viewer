@@ -1,3 +1,3 @@
-import AlgorithmSelector from "./AlgorithmSelector";
+import AlgorithmSelector from './AlgorithmSelector';
 
 export default AlgorithmSelector;

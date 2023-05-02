@@ -1,74 +1,64 @@
-import { describe, it, expect } from "vitest";
-import { bubbleSortWithSteps } from "../bubbleSort";
-import { mergeSortWithSteps } from "../mergeSort";
-import { quickSortWithSteps } from "../quickSort";
-import { UNSORTED_IDENTIFED_ARRAY_EXAMPLE } from "./data";
-import { insertionSortWithSteps } from "../insertionSort";
-import { selectionSortWithSteps } from "../selectionSort";
+import { describe, it, expect } from 'vitest';
+import { bubbleSortWithSteps } from '../bubbleSort';
+import { insertionSortWithSteps } from '../insertionSort';
+import { mergeSortWithSteps } from '../mergeSort';
+import { quickSortWithSteps } from '../quickSort';
+import { selectionSortWithSteps } from '../selectionSort';
+import { UNSORTED_IDENTIFED_ARRAY_EXAMPLE } from './data';
 
-describe("Algorithms", () => {
-  describe("Bubble Sort", () => {
-    it("Should sort the given array", () => {
-      const sortedArray = UNSORTED_IDENTIFED_ARRAY_EXAMPLE.sort(
-        (a, b) => a.number - b.number
-      );
+describe('Algorithms', () => {
+	describe('Bubble Sort', () => {
+		it('Should sort the given array', () => {
+			const sortedArray = UNSORTED_IDENTIFED_ARRAY_EXAMPLE.sort((a, b) => a.number - b.number);
 
-      const steps = bubbleSortWithSteps(UNSORTED_IDENTIFED_ARRAY_EXAMPLE);
+			const steps = bubbleSortWithSteps(UNSORTED_IDENTIFED_ARRAY_EXAMPLE);
 
-      const finalStep = steps[steps.length - 1];
-      expect(finalStep.array).toEqual(sortedArray);
-    });
-  });
+			const finalStep = steps[steps.length - 1];
+			expect(finalStep.array).toEqual(sortedArray);
+		});
+	});
 
-  describe("Insertion Sort", () => {
-    it("Should sort the given array", () => {
-      const sortedArray = UNSORTED_IDENTIFED_ARRAY_EXAMPLE.sort(
-        (a, b) => a.number - b.number
-      );
+	describe('Insertion Sort', () => {
+		it('Should sort the given array', () => {
+			const sortedArray = UNSORTED_IDENTIFED_ARRAY_EXAMPLE.sort((a, b) => a.number - b.number);
 
-      const steps = insertionSortWithSteps(UNSORTED_IDENTIFED_ARRAY_EXAMPLE);
+			const steps = insertionSortWithSteps(UNSORTED_IDENTIFED_ARRAY_EXAMPLE);
 
-      const finalStep = steps[steps.length - 1];
-      expect(finalStep.array).toEqual(sortedArray);
-    });
-  });
+			const finalStep = steps[steps.length - 1];
+			expect(finalStep.array).toEqual(sortedArray);
+		});
+	});
 
-  describe("Merge Sort", () => {
-    it("Should sort the given array", () => {
-      const sortedArray = UNSORTED_IDENTIFED_ARRAY_EXAMPLE.sort(
-        (a, b) => a.number - b.number
-      );
+	describe('Merge Sort', () => {
+		it('Should sort the given array', () => {
+			const sortedArray = UNSORTED_IDENTIFED_ARRAY_EXAMPLE.sort((a, b) => a.number - b.number);
 
-      const steps = mergeSortWithSteps(UNSORTED_IDENTIFED_ARRAY_EXAMPLE);
+			const steps = mergeSortWithSteps(UNSORTED_IDENTIFED_ARRAY_EXAMPLE);
 
-      const finalStep = steps[steps.length - 1];
-      expect(finalStep.array).toEqual(sortedArray);
-    });
-  });
+			const finalStep = steps[steps.length - 1];
+			expect(finalStep.array).toEqual(sortedArray);
+		});
+	});
 
-  describe("Quick Sort", () => {
-    it("Should sort the given array", () => {
-      const sortedArray = UNSORTED_IDENTIFED_ARRAY_EXAMPLE.sort(
-        (a, b) => a.number - b.number
-      );
+	describe('Quick Sort', () => {
+		it('Should sort the given array', () => {
+			const sortedArray = UNSORTED_IDENTIFED_ARRAY_EXAMPLE.sort((a, b) => a.number - b.number);
 
-      const steps = quickSortWithSteps(UNSORTED_IDENTIFED_ARRAY_EXAMPLE);
+			const steps = quickSortWithSteps(UNSORTED_IDENTIFED_ARRAY_EXAMPLE);
 
-      const finalStep = steps[steps.length - 1];
-      expect(finalStep.array).toEqual(sortedArray);
-    });
-  });
+			const finalStep = steps[steps.length - 1];
+			expect(finalStep.array).toEqual(sortedArray);
+		});
+	});
 
-  describe("Selection Sort", () => {
-    it("Should sort the given array", () => {
-      const sortedArray = UNSORTED_IDENTIFED_ARRAY_EXAMPLE.sort(
-        (a, b) => a.number - b.number
-      );
+	describe('Selection Sort', () => {
+		it('Should sort the given array', () => {
+			const sortedArray = UNSORTED_IDENTIFED_ARRAY_EXAMPLE.sort((a, b) => a.number - b.number);
 
-      const steps = selectionSortWithSteps(UNSORTED_IDENTIFED_ARRAY_EXAMPLE);
+			const steps = selectionSortWithSteps(UNSORTED_IDENTIFED_ARRAY_EXAMPLE);
 
-      const finalStep = steps[steps.length - 1];
-      expect(finalStep.array).toEqual(sortedArray);
-    });
-  });
+			const finalStep = steps[steps.length - 1];
+			expect(finalStep.array).toEqual(sortedArray);
+		});
+	});
 });

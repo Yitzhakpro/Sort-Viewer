@@ -1,3 +1,3 @@
-export * from "./algorithms";
-export * from "./colors";
-export * from "./defaults";
+export * from './algorithms';
+export * from './colors';
+export * from './defaults';
