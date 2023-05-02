@@ -1,20 +1,18 @@
 export type SortAlgorithm =
-  | "bubbleSort"
-  | "insertionSort"
-  | "selectionSort"
-  | "mergeSort"
-  | "quickSort";
+	| 'bubbleSort'
+	| 'insertionSort'
+	| 'selectionSort'
+	| 'mergeSort'
+	| 'quickSort';
 
-export type ColorMappingType = "CHECK" | "PIVOT" | "SWAPPING" | "SORTED";
+export type ColorMappingType = 'CHECK' | 'PIVOT' | 'SWAPPING' | 'SORTED';
 
-export interface ColorMapping {
-  [index: number]: ColorMappingType;
-}
+export type ColorMapping = Record<number, ColorMappingType>;
 
 export interface SortStep<T> {
-  array: T[];
-  colorMapping: ColorMapping;
-  permanentColorMapping: ColorMapping;
+	array: T[];
+	colorMapping: ColorMapping;
+	permanentColorMapping: ColorMapping;
 }
 
-export type SortSteps<T> = SortStep<T>[];
+export type SortSteps<T> = Array<SortStep<T>>;

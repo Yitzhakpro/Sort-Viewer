@@ -1,3 +1,3 @@
-import SpeedSlider from "./SpeedSlider";
+import SpeedSlider from './SpeedSlider';
 
 export default SpeedSlider;
