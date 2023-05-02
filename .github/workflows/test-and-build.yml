@@ -24,6 +24,9 @@ jobs:
       - name: Installing Deps
         run: yarn --frozen-lockfile
 
+      - name: Linting
+        run: yarn lint:check
+
       - name: Testing
         run: yarn test:run
 
