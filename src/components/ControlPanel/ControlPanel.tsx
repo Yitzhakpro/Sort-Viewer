@@ -3,13 +3,17 @@ import React, { useState } from 'react';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
-import { ButtonGroup, Stack, Typography, useMediaQuery } from '@mui/material';
-import { DEFAULT_RANDOM_ARRAY_LENGTH, DEFAULT_SORT_SPEED } from '../../constants';
+import { ButtonGroup, Stack, Select, Typography, useMediaQuery, MenuItem } from '@mui/material';
+import {
+	DEFAULT_RANDOM_ARRAY_LENGTH,
+	DEFAULT_SORT_SPEED,
+	LABLED_ALGORITHMS,
+} from '../../constants';
 import { Button } from '../../utilComponents';
-import AlgorithmSelector from '../AlgorithmSelector';
 import ArraySizeSlider from '../ArraySizeSlider';
 import SpeedSlider from '../SpeedSlider';
 import type { SortAlgorithm } from '../../types';
+import type { SelectChangeEvent } from '@mui/material';
 import './controlPanel.css';
 
 export interface IControlPanelProps {
@@ -51,12 +55,8 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
 		genNewList(length);
 	};
 
-	const handleChangeAlgorithm = (value: SortAlgorithm): void => {
-		if (!value) {
-			return;
-		}
-
-		setAlgorithm(value);
+	const handleChangeAlgorithm = (event: SelectChangeEvent<SortAlgorithm>): void => {
+		setAlgorithm(event.target.value as SortAlgorithm);
 	};
 
 	const handleLengthChange = (value: number): void => {
@@ -95,7 +95,21 @@ function ControlPanel(props: IControlPanelProps): JSX.Element {
 					Re-Generate List
 				</Button>
 
-				<AlgorithmSelector algorithm={algorithm} onAlgorithmChange={handleChangeAlgorithm} />
+				<Select
+					label="Algorithm"
+					variant="standard"
+					fullWidth={isFullWidthControls}
+					value={algorithm}
+					onChange={handleChangeAlgorithm}
+				>
+					{LABLED_ALGORITHMS.map((labledAlgo) => {
+						return (
+							<MenuItem key={labledAlgo.value} value={labledAlgo.value}>
+								{labledAlgo.label}
+							</MenuItem>
+						);
+					})}
+				</Select>
 
 				<ButtonGroup variant="contained" fullWidth={isFullWidthControls}>
 					<Button
