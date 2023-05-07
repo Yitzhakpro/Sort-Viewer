@@ -1,8 +1,8 @@
 {
 	"name": "sort-viewer",
 	"private": true,
-  "version": "1.4.0",
-  "homepage": "https://yitzhakpro.github.io/Sort-Viewer/",
+	"version": "1.5.0",
+	"homepage": "https://yitzhakpro.github.io/Sort-Viewer/",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
@@ -51,5 +51,4 @@
 		"vite": "^4.0.0",
 		"vitest": "^0.29.3"
 	}
-  
 }
